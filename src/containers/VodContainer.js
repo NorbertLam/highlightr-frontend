@@ -1,37 +1,26 @@
-import React from 'react';
+import React from 'react'
 
-import VodCard from '../components/VodCard'
-
-import Grid from '@material-ui/core/Grid';
+import {withRouter} from 'react-router-dom';
 
 class VodContainer extends React.Component {
 
-  state = {
-    vods: []
-  }
-
-  componentWillReceiveProps(nextProps) {
-    fetch(`https://api.twitch.tv/helix/videos?user_id=${nextProps.twitch_id}`, {
-      headers: {
-        'Client-ID': ''
-      }
-    })
-      .then(resp => resp.json())
-      .then(json => this.setState({vods: json.data}));
-  }
-
   render() {
-    const vodsArr = this.state.vods.map(vod => <VodCard vodObj={vod} />)
 
     return (
       <div>
-        <h1>Vods</h1>
-        <Grid container>
-          {vodsArr}
-        </Grid>
+        <h1>VOD</h1>
+        <iframe
+          title={'idk'}
+          src={`https://player.twitch.tv/?video=v${this.props.location.pathname.split('/')[3]}&autoplay=false`}
+          height="720"
+          width="1280"
+          frameBorder="0"
+          scrolling="no"
+          allowFullScreen={true}>
+        </iframe>
       </div>
     )
   }
 }
 
-export default VodContainer;
+export default withRouter(VodContainer);

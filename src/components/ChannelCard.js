@@ -7,7 +7,7 @@ import {selectStreamer} from '../actions/streamerActions'
 
 const ChannelCard = (props) => {
   return (
-    <div onClick={() => props.history.push(`/channel/${props.streamerObj.display_name}`)} >
+    <div onClick={() => props.history.push(`/channel/${props.streamerObj.login}`)} >
       <img src={props.streamerObj.profile_image_url} alt={props.streamerObj.profile_image_url} />
     </div>
   );
