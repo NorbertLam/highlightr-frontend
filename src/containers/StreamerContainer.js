@@ -1,4 +1,5 @@
 import React from 'react'
+import VodContainer from './VodContainer'
 
 import {connect} from 'react-redux'
 
@@ -22,13 +23,14 @@ class StreamerContainer extends React.Component {
       <div>
         <h1>{this.state.streamer.display_name}</h1>
         <iframe
-          src={`https://player.twitch.tv/?channel=${this.state.streamer.display_name}&muted=true`}
+          src={`https://player.twitch.tv/?channel=${this.props.location.pathname.split('/')[2]}&muted=true`}
           height="720"
           width="1280"
           frameBorder="0"
           scrolling="no"
           allowFullScreen={true}>
         </iframe>
+        <VodContainer twitch_id={this.state.streamer.twitch_id}/>
       </div>
     )
   }
