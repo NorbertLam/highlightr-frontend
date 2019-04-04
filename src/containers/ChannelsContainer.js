@@ -16,8 +16,9 @@ class ChannelContainer extends React.Component {
   }
   
   render () {
-    const streamersArr = this.props.streamers.map(streamer => {
-      return <ChannelCard key={streamer.id} streamerObj={streamer} />
+    const streamersArr = Object.keys(this.props.streamers).map(display_name => {
+      return <ChannelCard key={this.props.streamers[display_name].twitch_id} 
+        streamerObj={this.props.streamers[display_name]} />
     })
 
     return (
@@ -39,4 +40,4 @@ const mapDispatchToProps = (dispatch) => ({
   getStreamers: () => dispatch(getStreamers())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChannelContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ChannelContainer));

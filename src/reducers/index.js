@@ -3,7 +3,7 @@ const initialState = {
   user: {},
   selectedStreamer: {},
   streamerInfo: {
-    streamers: []
+    streamers: {}
   }
 }
 
@@ -11,7 +11,13 @@ const reducer = (state = initialState, action) => {
   switch(action.type) {
     case ('LOAD_STREAMERS'): {
       // console.log(action.payload)
-      return {...state, streamerInfo:{ streamers: action.payload }}
+      const streamers = {}
+
+      action.payload.forEach(streamer => {
+        streamers[streamer.display_name] = streamer;
+      })
+      
+      return {...state, streamerInfo:{ streamers: streamers}}
     }
     case ('SELECT_STREAMER'): {
       return {...state, selectedStreamer: action.payload}
