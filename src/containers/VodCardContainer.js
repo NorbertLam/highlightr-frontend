@@ -11,7 +11,7 @@ class VodCardContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(process.env)
+    
 
     fetch(`https://api.twitch.tv/helix/videos?user_id=${nextProps.twitch_id.toLowerCase()}`, {
       headers: {

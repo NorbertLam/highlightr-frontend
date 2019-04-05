@@ -10,7 +10,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case ('LOAD_STREAMERS'): {
-      // console.log(action.payload)
       const streamers = {}
 
       action.payload.forEach(streamer => {

@@ -1,24 +1,42 @@
 import React from 'react';
 
+import {withRouter} from 'react-router-dom';
+
+import {connect} from 'react-redux';
+
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import {createUser} from '../actions/userActions';
 
 
 class SignupForm extends React.Component {
-  
+
+  style = {
+    backgroundColor: '#6441A1',
+    color: 'white'
+  }
+
   state = {
     email: '',
     username: '',
     password: ''
   }
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({[name]: event.target.value});
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.createUser(this.state);
+    this.props.history.push('/')
   }
 
   render () {
     return (
       <div>
-        <form autoComplete="off">
+        <form id="signupForm" autoComplete="off" onSubmit={this.handleSubmit}>
           <TextField
             label="Email"
             className="email"
@@ -45,10 +63,17 @@ class SignupForm extends React.Component {
             variant="outlined"
             onChange={this.handleChange('password')}
           /> <br/>
+          <Button variant="contained" style={this.style} type="submit" form="signupForm">
+            Signup
+          </Button>
         </form>
       </div>
     )
   }
 }
 
-export default SignupForm;
+const mapDispatchToProps = dispatch => {
+  return {createUser: (userObj) => dispatch(createUser(userObj))}
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(SignupForm));

@@ -10,9 +10,9 @@ const HomeContainer = () => {
         src="https://www.youtube.com/embed/2S24-y0Ij3Y" 
         height="720" 
         width="1280" 
-        frameborder="0" 
+        frameBorder="0" 
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
+        allowFullScreen>
       </iframe>
     </div>
   )
