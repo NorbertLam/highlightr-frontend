@@ -7,6 +7,7 @@ const NavBar = () => {
     <Toolbar>
       <NavLink className="nav-item" to="/">Home</NavLink>
       <NavLink className="nav-item" to="/channels">Channels</NavLink>
+      <NavLink className="nav-item" to="/signup">Signup</NavLink>
     </Toolbar>
   )
 }
