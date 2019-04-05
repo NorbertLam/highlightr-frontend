@@ -28,7 +28,7 @@ class VodCardContainer extends React.Component {
     return (
       <div>
         <h1>Vods</h1>
-        <Grid container>
+        <Grid container alignItems="center" justify="center">
           {vodsArr}
         </Grid>
       </div>

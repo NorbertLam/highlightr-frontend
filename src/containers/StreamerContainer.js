@@ -31,6 +31,13 @@ class StreamerContainer extends React.Component {
           scrolling="no"
           allowFullScreen={true}>
         </iframe>
+        <iframe frameborder="0"
+          title="twitch-chat"
+          id="chat_embed"
+          src={`https://www.twitch.tv/embed/${this.props.location.pathname.split('/')[2]}/chat`}
+          height="720"
+          width="350">
+        </iframe>
         <VodCardContainer twitch_id={this.state.streamer.twitch_id}/>
       </div>
     )

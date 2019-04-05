@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
   }
 
   handleChange = (name) => (event) => {
-    this.setState({name: event.target.value})
+    this.setState({[name]: event.target.value})
   }
 
   handleSubmit = (event) => {
