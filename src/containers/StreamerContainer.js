@@ -1,7 +1,9 @@
-import React from 'react'
-import VodCardContainer from './VodCardContainer'
+import React from 'react';
+import VodCardContainer from './VodCardContainer';
 
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+
+import {getStream} from '../actions/streamerActions';
 
 class StreamerContainer extends React.Component {
 
@@ -14,14 +16,16 @@ class StreamerContainer extends React.Component {
 
     fetch(`http://localhost:3000/api/v1/streamers/${streamerName}`)
       .then(resp => resp.json())
-      .then(streamer => this.setState({streamer}));
+      .then(streamer => this.setState({streamer}, () => {
+        this.props.getStream(this.state.streamer.twitch_id);
+      }));
   }
 
   render() {
     
     return (
       <div>
-        <h1>{this.state.streamer.display_name}</h1>
+        <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream.title}</h1>
         <iframe
           title={this.state.streamer.login}
           src={`https://player.twitch.tv/?channel=${this.props.location.pathname.split('/')[2]}&muted=true`}
@@ -46,8 +50,13 @@ class StreamerContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    streamers: state.streamerInfo.streamers
+    streamers: state.streamerInfo.streamers,
+    currentStream: state.currentStream
   }
 }
 
-export default connect(mapStateToProps)(StreamerContainer);
+const maptDispatchToProps = (dispatch) => {
+  return {getStream: (user_id) => dispatch(getStream(user_id))}
+}
+
+export default connect(mapStateToProps, maptDispatchToProps)(StreamerContainer);
