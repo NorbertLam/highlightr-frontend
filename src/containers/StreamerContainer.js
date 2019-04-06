@@ -25,7 +25,7 @@ class StreamerContainer extends React.Component {
     
     return (
       <div>
-        <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream.title}</h1>
+        <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream === undefined ? this.state.streamer.display_name : this.props.currentStream.title}</h1>
         <iframe
           title={this.state.streamer.login}
           src={`https://player.twitch.tv/?channel=${this.props.location.pathname.split('/')[2]}&muted=true`}
