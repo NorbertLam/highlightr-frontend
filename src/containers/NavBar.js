@@ -13,12 +13,12 @@ const styles = theme => ({
   }
 });
 
-const tabs = { '/': 0, '/channels': 1, '/signup': 2, '/login': 3}
+const tabs = { '': 0, 'channels': 1, 'signup': 2, 'login': 3, 'channel': 1}
 
 class NavBar extends React.Component {
 
   state = {
-    value: tabs[window.location.pathname]
+    value: tabs[window.location.pathname.split('/')[1]]
   }
 
   handleChange = (event, value) => {
