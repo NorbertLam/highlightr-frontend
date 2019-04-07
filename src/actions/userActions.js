@@ -32,3 +32,16 @@ export const loginUser = (userObj) => (dispatch) => {
       localStorage.setItem('token', json.jwt);
     })
 }
+
+export const getCurrUser = (token) => (dispatch) => {
+  return fetch('http://localhost:3000/api/v1/current_user', {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      'accepts': "application/json",
+      'Authorization': `${token}`
+    }
+  })
+    .then(resp => resp.json())
+    .then(console.log)
+}

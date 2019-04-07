@@ -35,6 +35,7 @@ class NavBar extends React.Component {
               <Tab style={{color: 'white'}} component={NavLink} to="/channels" label="Channels"/>
               <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/>
               <Tab style={{color: 'white'}} component={NavLink} to="/login" label="Login"/>
+              <Tab style={{color: 'white'}} component={NavLink} to="/profile" label="Profile"/>
             </Tabs>
           <Grid style={{float: 'right'}}>
               <Tab style={{color: 'white', float: 'right'}} label="Iwantthisontherightcorner"/>

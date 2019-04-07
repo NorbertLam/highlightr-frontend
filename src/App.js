@@ -7,11 +7,24 @@ import StreamerContainer from './containers/StreamerContainer';
 import VodContainer from './containers/VodContainer';
 import SignupContainer from './containers/SignupContainer';
 import LoginContainer from './containers/LoginContainer';
+import ProfileContainer from './containers/ProfileContainer'
 import './App.css';
 
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+
+import {getCurrUser} from './actions/userActions';
 
 class App extends Component {
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.props.getCurrUser(token);
+    } else {
+      console.log('not logged in');
+    }
+  }
 
   render() {
     return (
@@ -23,6 +36,7 @@ class App extends Component {
           <Route path="/channels" component={ChannelsContainer} />
           <Route path="/signup" component={SignupContainer} />
           <Route path="/login" component={LoginContainer} />
+          <Route path="/profile" component={ProfileContainer} />
           <Route path="/" component={HomeContainer} />
         </Switch>
       </div>
@@ -30,10 +44,16 @@ class App extends Component {
   }
 }
 
-const mapPropstoState = (state) => {
+const mapStateToProps = (state) => {
   return {
     selectedStreamer: state.selectedStreamer
   }
 }
 
-export default connect(mapPropstoState)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCurrUser: (token) => dispatch(getCurrUser(token))    
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
