@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import {loginUser} from '../actions/userActions';
+
 class LoginForm extends React.Component {
 
   style = {
@@ -25,7 +27,7 @@ class LoginForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('login');
+    this.props.loginUser(this.state);
   }
   
   render () {
@@ -59,4 +61,8 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (userObj) => dispatch(loginUser(userObj))
+})
+
+export default connect(null, mapDispatchToProps)(LoginForm);
