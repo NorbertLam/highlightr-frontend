@@ -1,6 +1,8 @@
 
 // User Action Creator
 
+export const getUser = (userObj) => ({type: 'GET_USER', payload: userObj});
+
 
 // User Thunk Creator
 
@@ -25,5 +27,8 @@ export const loginUser = (userObj) => (dispatch) => {
     body: JSON.stringify(userObj)
   })
     .then(resp => resp.json())
-    .then(console.log)
+    .then(json => {
+      dispatch(getUser(json.user));
+      localStorage.setItem('token', json.jwt);
+    })
 }

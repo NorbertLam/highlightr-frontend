@@ -25,6 +25,9 @@ const reducer = (state = initialState, action) => {
     case ('LOAD_STREAM'): {
       return {...state, currentStream: action.payload};
     }
+    case ('GET_USER'): {
+      return {...state, user: action.payload};
+    }
     default:
       return state;
   }
