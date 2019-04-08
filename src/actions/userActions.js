@@ -2,6 +2,7 @@
 // User Action Creator
 
 export const getUser = (userObj) => ({type: 'GET_USER', payload: userObj});
+export const changeIndicator = () => ({type: 'CHANGE_INDICATOR'});
 
 
 // User Thunk Creator
