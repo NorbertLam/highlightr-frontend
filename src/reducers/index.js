@@ -28,6 +28,9 @@ const reducer = (state = initialState, action) => {
     case ('GET_USER'): {
       return {...state, user: action.payload};
     }
+    case ('CLEAR_USER'): {
+      return {...state, user: {}}
+    }
     default:
       return state;
   }

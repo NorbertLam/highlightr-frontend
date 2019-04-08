@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 
-import {loginUser} from '../actions/userActions';
+import {loginUser, clearUser} from '../actions/userActions';
 
 
 const styles = theme => ({
@@ -36,7 +36,7 @@ class NavBar extends React.Component {
 
   state = {
     value: tabs[window.location.pathname.split('/')[1]],
-    emai: '',
+    email: '',
     password: '',
     open: false
   }
@@ -52,13 +52,13 @@ class NavBar extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.loginUser(this.state);
-    this.setState({open: false, value: 4});
-    this.props.history.push('/profile');
+    this.setState({open: false, value: tabs[window.location.pathname.split('/')[1]]});
   }
 
   handleLogout = () => {
     localStorage.removeItem('token');
     this.setState({value: 0})
+    this.props.clearUser();
     this.props.history.push('/');
   }
 
@@ -71,6 +71,9 @@ class NavBar extends React.Component {
   }
   
   render () {
+
+    const isUser = Object.keys(this.props.user).length;
+
     return (
       <div className={this.props.paper}>
         <AppBar position="sticky">
@@ -78,12 +81,12 @@ class NavBar extends React.Component {
             <Tabs classes={{indicator: this.props.classes.indicator}} value={this.state.value} onChange={this.handleTab}>
               <Tab style={{color: 'white'}} component={NavLink} to="/" label="Home"/>
               <Tab style={{color: 'white'}} component={NavLink} to="/channels" label="Channels"/>
-              <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/>
-              {/* <Tab style={{color: 'white'}} component={NavLink} to="/login" label="Login"/> */}
-              <Tab style={{color: 'white'}} onClick={this.handleOpen} label="Login"/>
+              {/* <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/> */}
+              {isUser === 0 ? <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/> : null}
+              {isUser === 0  ? <Tab style={{color: 'white'}} onClick={this.handleOpen} label="Login"/> : null}
               <Tab style={{color: 'white'}} component={NavLink} to="/profile" label="Profile"/>
             </Tabs>
-              <Tab onClick={this.handleLogout} label="Logout"/>
+              {isUser > 0 ? <Tab onClick={this.handleLogout} label="Logout"/> : null}
           {/* <Grid style={{float: 'right'}}>
               <Tab style={{color: 'white', float: 'right'}} label="Iwantthisontherightcorner"/>
             </Grid> */}
@@ -126,8 +129,13 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  loginUser: (userObj) => dispatch(loginUser(userObj))
+const mapStateToProps = (state) => ({
+  user: state.user
 })
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(withRouter(NavBar)));
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (userObj) => dispatch(loginUser(userObj)),
+  clearUser: () => dispatch(clearUser())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withRouter(NavBar)));
