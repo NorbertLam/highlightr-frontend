@@ -43,5 +43,7 @@ export const getCurrUser = (token) => (dispatch) => {
     }
   })
     .then(resp => resp.json())
-    .then(console.log)
+    .then(json => {
+      dispatch(getUser(json.user));
+    })
 }

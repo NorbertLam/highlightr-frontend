@@ -7,7 +7,7 @@ class ProfileContainer extends React.Component {
   render() {
     return (
       <div>
-        <h1>Profile</h1>
+        <Profile />
       </div>
     )
   }

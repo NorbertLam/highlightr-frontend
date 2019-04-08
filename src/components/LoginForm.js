@@ -28,6 +28,7 @@ class LoginForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.loginUser(this.state);
+    this.props.history.push('/profile');
   }
   
   render () {
@@ -65,4 +66,4 @@ const mapDispatchToProps = (dispatch) => ({
   loginUser: (userObj) => dispatch(loginUser(userObj))
 })
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(withRouter(LoginForm));
