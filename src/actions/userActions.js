@@ -3,8 +3,7 @@
 
 export const getUser = (userObj) => ({type: 'GET_USER', payload: userObj});
 export const clearUser = () => ({type: 'CLEAR_USER'});
-export const changeIndicator = () => ({type: 'CHANGE_INDICATOR'});
-
+export const changeIndicator = () => ({type: 'CHANGE_INDICATOR', payload: 0});
 
 // User Thunk Creator
 

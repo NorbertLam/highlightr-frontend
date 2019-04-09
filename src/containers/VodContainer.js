@@ -2,6 +2,10 @@ import React from 'react'
 
 import {withRouter} from 'react-router-dom';
 
+import Hightlight from '../components/Hightlight'
+
+import Grid from '@material-ui/core/Grid';
+
 class VodContainer extends React.Component {
 
   render() {
@@ -18,6 +22,13 @@ class VodContainer extends React.Component {
           scrolling="no"
           allowFullScreen={true}>
         </iframe>
+        <div style={{backgroundColor: "red"}}>
+          <Grid>
+            <Hightlight/>
+            <Hightlight/>
+            <Hightlight/>
+          </Grid>
+        </div>
       </div>
     )
   }
