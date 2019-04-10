@@ -42,7 +42,7 @@ class VodContainer extends React.Component {
     return (
       <div>
         <h1>VOD</h1>
-        <iframe
+        <iframe style={{float: 'left', marginLeft: '10px'}}
           title={'idk'}
           src={`https://player.twitch.tv/?video=v${this.getVodId()}&autoplay=${this.state.autoplay}&time=${time[0]}h${time[1]}m${time[2]}s`}
           height="720"
@@ -51,10 +51,10 @@ class VodContainer extends React.Component {
           scrolling="no"
           allowFullScreen={true}>
         </iframe>
-        <div>
           <Grid>
             {highlightsArr}
           </Grid>
+        <div>
         </div>
       </div>
     )

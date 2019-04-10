@@ -6,8 +6,8 @@ class Highlight extends React.Component {
   
   render() {
     return (
-      <div style={{marginTop: "10px"}}>
-        <Button 
+      <div>
+        <Button
           variant="contained" 
           color="primary" 
           onClick={() => this.props.setTime(this.props.highlight.start)}>
