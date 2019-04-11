@@ -5,7 +5,8 @@ const initialState = {
   streamerInfo: {
     streamers: {}
   },
-  currentStream: {}
+  currentStream: {},
+  clips: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +31,9 @@ const reducer = (state = initialState, action) => {
     }
     case ('CLEAR_USER'): {
       return {...state, user: {}}
+    }
+    case ('LOAD_CLIPS'): {
+      return {...state, clips: action.payload};
     }
     default:
       return state;

@@ -10,7 +10,6 @@ const VodCard = (props) => {
   }
 
   const thumbnail = props.vodObj.thumbnail_url.split('-').slice(0, 2).join('-');
-  console.log(props.vodObj);
 
   return (
     <div onClick={() => props.history.push(`/channel/${props.vodObj.user_name}/${props.vodObj.id}`)}>
