@@ -7,7 +7,8 @@ const initialState = {
   },
   currentStream: {},
   selectedClip: {},
-  clips: []
+  clips: [],
+  results: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +39,9 @@ const reducer = (state = initialState, action) => {
     }
     case ('SELECT_CLIP'): {
       return {...state, selectedClip: action.payload};
+    }
+    case ('LOAD_SEARCH'): {
+      return {...state, results: action.payload};
     }
     default:
       return state;

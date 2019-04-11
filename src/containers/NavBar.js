@@ -1,6 +1,8 @@
 import React from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 
+import Search from '../components/Search'
+
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -78,11 +80,9 @@ class NavBar extends React.Component {
               {isUser === 0 ? <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/> : null}
               {isUser === 0  ? <Tab style={{color: 'white'}} onClick={this.handleOpen} label="Login"/> : null}
               <Tab style={{color: 'white'}} component={NavLink} to="/profile" label="Profile"/>
-            </Tabs>
               {isUser > 0 ? <Tab onClick={this.handleLogout} label="Logout"/> : null}
-          {/* <Grid style={{float: 'right'}}>
-              <Tab style={{color: 'white', float: 'right'}} label="Iwantthisontherightcorner"/>
-            </Grid> */}
+            </Tabs>
+            <Search/>
           </Toolbar>
         </AppBar>
           <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="lg">
