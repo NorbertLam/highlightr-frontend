@@ -12,7 +12,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {getStream} from '../actions/streamerActions';
-import {getClips} from '../actions/clipActions';
+import {getClips, selectClip} from '../actions/clipActions';
 
 class StreamerContainer extends React.Component {
 
@@ -38,6 +38,7 @@ class StreamerContainer extends React.Component {
 
   handleClose = () => {
     this.setState({open: false});
+    this.props.selectClip({});
   }
 
   render() {
@@ -64,10 +65,10 @@ class StreamerContainer extends React.Component {
         <VodCardContainer twitch_id={this.state.streamer.twitch_id} />
         <ClipCardsContainer streamerObj={this.state.streamer} handleOpen={this.handleOpen} />
         <Dialog
+          fullWidth={true}
           open={this.state.open}
           onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          maxWidth="lg"
         >
           <ClipContainer />
         </Dialog>
@@ -86,7 +87,8 @@ const mapStateToProps = (state) => {
 const maptDispatchToProps = (dispatch) => {
   return {
     getStream: (user_id) => dispatch(getStream(user_id)),
-    getClips: (twitch_id) => dispatch(getClips(twitch_id))
+    getClips: (twitch_id) => dispatch(getClips(twitch_id)),
+    selectClip: (clipObj) => dispatch(selectClip(clipObj))
   }
 }
 

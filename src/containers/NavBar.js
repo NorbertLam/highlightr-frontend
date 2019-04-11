@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -7,9 +8,9 @@ import Tab from '@material-ui/core/Tab';
 // import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import Dialog from '@material-ui/core/Dialog';
 
 import {connect} from 'react-redux';
 
@@ -19,14 +20,6 @@ import {loginUser, clearUser} from '../actions/userActions';
 const styles = theme => ({
   indicator: {
     backgroundColor: '#fff'
-  },
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: 'none',
   }
 });
 
@@ -75,7 +68,7 @@ class NavBar extends React.Component {
     const isUser = Object.keys(this.props.user).length;
 
     return (
-      <div className={this.props.paper}>
+      <div>
         <AppBar position="sticky">
           <Toolbar style={{backgroundColor: '#6441A1'}}>
             <Tabs classes={{indicator: this.props.classes.indicator}} value={this.state.value} onChange={this.handleTab}>
@@ -92,9 +85,9 @@ class NavBar extends React.Component {
             </Grid> */}
           </Toolbar>
         </AppBar>
-          <Modal open={this.state.open} onClose={this.handleClose}>
+          <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="lg">
             <div>
-              <form style={{backgroundColor : '#484848', position:'absolute',top:'50%', left:'50%'}} id="loginForm" onSubmit={this.handleSubmit}>
+              <form style={{backgroundColor : '#484848'}} id="loginForm" onSubmit={this.handleSubmit}>
                 <h1>Holyfuckthisistrash</h1>
                 <TextField
                   label="Email"
@@ -119,7 +112,7 @@ class NavBar extends React.Component {
                 </Button>
               </form>
             </div>
-          </Modal>
+          </Dialog>
       </div>
     )
   }

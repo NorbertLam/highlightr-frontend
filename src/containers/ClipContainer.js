@@ -6,7 +6,7 @@ class ClipContainer extends React.Component {
 
   render() {
     return (
-      <div style={{width: "80%"}}>
+      <div>
         <iframe
           // title={this.state.streamer.login}
           src={this.props.selectedClip.embed_url}
