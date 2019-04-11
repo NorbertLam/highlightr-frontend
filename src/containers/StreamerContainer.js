@@ -1,8 +1,15 @@
 import React from 'react';
 import VodCardContainer from './VodCardContainer';
-import ClipsContainer from './ClipCardsContainer';
+import ClipContainer from './ClipContainer';
+import ClipCardsContainer from './ClipCardsContainer';
 
 import {connect} from 'react-redux';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {getStream} from '../actions/streamerActions';
 import {getClips} from '../actions/clipActions';
@@ -10,7 +17,8 @@ import {getClips} from '../actions/clipActions';
 class StreamerContainer extends React.Component {
 
   state = {
-    streamer: {}
+    streamer: {},
+    open: false
   }
 
   componentDidMount() {
@@ -22,6 +30,14 @@ class StreamerContainer extends React.Component {
         this.props.getStream(this.state.streamer.twitch_id);
         this.props.getClips(this.state.streamer.twitch_id);
       }));
+  }
+
+  handleOpen = () => {
+    this.setState({open: true});
+  }
+
+  handleClose = () => {
+    this.setState({open: false});
   }
 
   render() {
@@ -46,7 +62,15 @@ class StreamerContainer extends React.Component {
           width="350">
         </iframe>
         <VodCardContainer twitch_id={this.state.streamer.twitch_id} />
-        <ClipsContainer streamerObj={this.state.streamer} />
+        <ClipCardsContainer streamerObj={this.state.streamer} handleOpen={this.handleOpen} />
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <ClipContainer />
+        </Dialog>
       </div>
     )
   }

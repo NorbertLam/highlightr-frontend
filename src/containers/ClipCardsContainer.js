@@ -11,7 +11,7 @@ import {getClips} from '../actions/clipActions';
 class ClipsContainer extends React.Component {
 
   render() {
-    const clipsArr = this.props.clips.map(clip => <ClipCard clipObj={clip} />)
+    const clipsArr = this.props.clips.map(clip => <ClipCard clipObj={clip} handleOpen={this.props.handleOpen} />)
 
     return (
       <div>

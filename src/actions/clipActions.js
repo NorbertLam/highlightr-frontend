@@ -2,6 +2,7 @@
 // Clip Action Creator
 
 export const loadClips = (clips) => ({ type: 'LOAD_CLIPS', payload: clips });
+export const selectClip = (clipObj) => ({ type: 'SELECT_CLIP', payload: clipObj });
 
 // Clip Action Thunk Creator
 
