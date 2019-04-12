@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "awesome-debounce-promise": "^2.1.0",
     "dotenv": "^7.0.0",
     "downshift": "^3.2.7",
     "react": "^16.8.6",

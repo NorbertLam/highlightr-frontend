@@ -3,6 +3,7 @@ import Downshift from 'downshift';
 
 import {connect} from 'react-redux';
 
+import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +12,7 @@ import PropTypes from "prop-types";
 
 import {getSearch} from '../actions/searchActions';
 
-const styles = {
+const styles = theme => ({
   input: {
     color: "white"
   },
@@ -25,9 +26,17 @@ const styles = {
     },
     '&:hover:before': {
       borderBottomColor: ['white', '!important'],
-    }
+    },
+    marginTop: '15px'
+  },
+  paper: {
+    position: 'absolute',
+    zIndex: 1,
+    marginTop: theme.spacing.unit,
+    left: 0,
+    right: 0,
   }
-};
+});
 
 class Search extends React.Component {
 
@@ -41,34 +50,47 @@ class Search extends React.Component {
   }
 
   handleInput = (event) => {
-    this.setState({[event.target.name]: event.target.value})
+    this.setState({[event.target.name]: event.target.value}, () => {
+      this.props.getSearch(this.state.input);
+    })
   }
 
   render() {
     const { classes } = this.props;
-    console.log(classes);
 
     return (
       <div>
         <Downshift
           inputValue={this.state.inputValue}
-          onChange={this.handleChange}
-          selectedItem={this.state.selectedItem}
-        >
+          // onChange={this.handleChange}
+          selectedItem={this.state.selectedItem} >
           {({
-        getInputProps,
-        getItemProps,
-        getLabelProps,
-        getMenuProps,
-        isOpen,
-        inputValue,
-        highlightedIndex,
-        selectedItem,
+            getInputProps,
+            getItemProps,
+            getLabelProps,
+            getMenuProps,
+            isOpen,
+            inputValue,
+            highlightedIndex,
+            selectedItem,
       }) => (
         <div>
-          <label></label>
-          {/* InputProps={{style: {color: 'white'}}} */}
-          <TextField InputProps={{classes:{underline: classes.underline}}} name='input' value={this.state.input} onChange={this.handleInput} />
+          <TextField 
+            {...getInputProps({onChange: this.handleInput})}
+            InputProps={{classes:{underline: classes.underline}}} 
+            name='input' 
+            placeholder="Streamer Search" 
+            value={this.state.input} 
+            />
+          <div {...getMenuProps()}>
+            {isOpen ? (
+              <Paper className={classes.paper}>
+                {!!this.props.results ? 
+                  this.props.results.map(item => <MenuItem {...getItemProps} key={item.display_name}>{item.display_name}</MenuItem>)
+                  : <MenuItem>Empty</MenuItem>}
+              </Paper>
+              ) : null }
+          </div>
         </div>
       )}
         </Downshift>

@@ -6,8 +6,6 @@ import Grid from '@material-ui/core/Grid';
 
 import ClipCard from '../components/ClipCard';
 
-import {getClips} from '../actions/clipActions';
-
 class ClipsContainer extends React.Component {
 
   render() {
