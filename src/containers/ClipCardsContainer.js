@@ -9,7 +9,7 @@ import ClipCard from '../components/ClipCard';
 class ClipsContainer extends React.Component {
 
   render() {
-    const clipsArr = this.props.clips.map(clip => <ClipCard clipObj={clip} handleOpen={this.props.handleOpen} />)
+    const clipsArr = this.props.clips.map(clip => <ClipCard key={clip.id} clipObj={clip} handleOpen={this.props.handleOpen} />)
 
     return (
       <div>

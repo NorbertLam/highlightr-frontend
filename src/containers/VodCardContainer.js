@@ -1,27 +1,21 @@
 import React from 'react';
 
+import {connect} from 'react-redux';
+
 import VodCard from '../components/VodCard'
 
 import Grid from '@material-ui/core/Grid';
 
+import {getVods} from '../actions/vodActions';
+
 class VodCardContainer extends React.Component {
 
-  state = {
-    vods: []
-  }
-
-  componentWillReceiveProps(nextProps) {
-    fetch(`https://api.twitch.tv/helix/videos?user_id=${nextProps.twitch_id.toLowerCase()}`, {
-      headers: {
-        'Client-ID': process.env.REACT_APP_CLIENT
-      }
-    })
-      .then(resp => resp.json())
-      .then(json => this.setState({vods: json.data}));
+  componentDidMount() {
+    this.props.getVods(this.props.twitch_id);
   }
 
   render() {
-    const vodsArr = this.state.vods.map(vod => <VodCard key={vod.id} vodObj={vod} />)
+    const vodsArr = this.props.vods.map(vod => <VodCard key={vod.id} vodObj={vod} />)
 
     return (
       <div>
@@ -34,4 +28,6 @@ class VodCardContainer extends React.Component {
   }
 }
 
-export default VodCardContainer;
+const mapStateToProps = (state) => ({vods: state.vods})
+
+export default connect(mapStateToProps,{getVods})(VodCardContainer);

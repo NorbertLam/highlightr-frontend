@@ -7,6 +7,7 @@ const initialState = {
   },
   currentStream: {},
   selectedClip: {},
+  vods: [],
   clips: [],
   results: []
 }
@@ -32,7 +33,10 @@ const reducer = (state = initialState, action) => {
       return {...state, user: action.payload};
     }
     case ('CLEAR_USER'): {
-      return {...state, user: {}}
+      return {...state, user: {}};
+    }
+    case ('LOAD_VODS'): {
+      return {...state, vods: action.payload};
     }
     case ('LOAD_CLIPS'): {
       return {...state, clips: action.payload};

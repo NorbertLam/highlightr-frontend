@@ -76,7 +76,6 @@ class NavBar extends React.Component {
             <Tabs classes={{indicator: this.props.classes.indicator}} value={this.state.value} onChange={this.handleTab}>
               <Tab style={{color: 'white'}} component={NavLink} to="/" label="Home"/>
               <Tab style={{color: 'white'}} component={NavLink} to="/channels" label="Channels"/>
-              {/* <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/> */}
               {isUser === 0 ? <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/> : null}
               {isUser === 0  ? <Tab style={{color: 'white'}} onClick={this.handleOpen} label="Login"/> : null}
               <Tab style={{color: 'white'}} component={NavLink} to="/profile" label="Profile"/>
