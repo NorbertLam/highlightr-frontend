@@ -1,9 +1,11 @@
 import React from 'react';
 import Downshift from 'downshift';
 
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+
 import {connect} from 'react-redux';
 
-import Menu from '@material-ui/core/Menu';
+import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -38,36 +40,51 @@ const styles = theme => ({
   }
 });
 
+const searchAPI = channel => fetch(`https://api.twitch.tv/kraken/search/channels?query=${channel}&limit=5`, {
+  headers: {
+    'content-type': 'application/json',
+    'Client-ID': process.env.REACT_APP_CLIENT
+  }
+});
+
+const searchAPIDebounced = AwesomeDebouncePromise(searchAPI, 500);
+
 class Search extends React.Component {
 
   state = {
     input: '',
-    selectedItem: ''
+    selectedItem: '',
+    results: null
   }
 
-  handleChange = () => {
-    console.log('change');
+  componentWillUnmount() {
+    this.setState = () => {};
   }
 
-  handleInput = (event) => {
-    this.setState({[event.target.name]: event.target.value}, () => {
-      this.props.getSearch(this.state.input);
-    })
+  handleChange = (event) => {
+    console.log('aaaaaaaaa');
+  }
+
+  handleInput = async e => {
+    const { input } = this.state
+    this.setState({ input: e.target.value, results: null});
+    const result = await searchAPIDebounced(e.target.value).then(resp => resp.json());
+    this.setState({results: result.channels});
   }
 
   render() {
     const { classes } = this.props;
+    const { input } = this.state
 
     return (
       <div>
         <Downshift
           inputValue={this.state.inputValue}
-          // onChange={this.handleChange}
+          onChange={selection => console.log('selection')}
           selectedItem={this.state.selectedItem} >
           {({
             getInputProps,
             getItemProps,
-            getLabelProps,
             getMenuProps,
             isOpen,
             inputValue,
@@ -75,22 +92,23 @@ class Search extends React.Component {
             selectedItem,
       }) => (
         <div>
-          <TextField 
-            {...getInputProps({onChange: this.handleInput})}
-            InputProps={{classes:{underline: classes.underline}}} 
-            name='input' 
-            placeholder="Streamer Search" 
-            value={this.state.input} 
+          <TextField
+            InputProps={getInputProps({
+              placeholder: "Search...",
+              value: input,
+              onChange: this.handleInput,
+              classes: {underline: classes.underline}
+            })}
             />
-          <div {...getMenuProps()}>
+          <MenuList {...getMenuProps()}>
             {isOpen ? (
               <Paper className={classes.paper}>
-                {!!this.props.results ? 
-                  this.props.results.map(item => <MenuItem {...getItemProps} key={item.display_name}>{item.display_name}</MenuItem>)
+                {!!this.state.results ? 
+                  this.state.results.map(item => <MenuItem {...getItemProps} key={item.display_name}>{item.display_name}</MenuItem>)
                   : <MenuItem>Empty</MenuItem>}
               </Paper>
               ) : null }
-          </div>
+          </MenuList>
         </div>
       )}
         </Downshift>
