@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import Downshift from 'downshift';
 
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
@@ -11,6 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import Typography from '@material-ui/core/Typography';
+
 
 import {getSearch} from '../actions/searchActions';
 
@@ -29,7 +32,7 @@ const styles = theme => ({
     '&:hover:before': {
       borderBottomColor: ['white', '!important'],
     },
-    marginTop: '15px'
+    marginTop: '31px'
   },
   paper: {
     position: 'absolute',
@@ -37,6 +40,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     left: 0,
     right: 0,
+  },
+  logo: {
+    width: '30%'
   }
 });
 
@@ -72,6 +78,11 @@ class Search extends React.Component {
     this.setState({results: result.channels});
   }
 
+  handleItemClick = (event) => {
+    this.props.history.push(`/channel/${event.target.innerText}`);
+    this.setState({input: ''});
+  }
+
   render() {
     const { classes } = this.props;
     const { input } = this.state
@@ -80,7 +91,6 @@ class Search extends React.Component {
       <div>
         <Downshift
           inputValue={this.state.inputValue}
-          onChange={selection => console.log('selection')}
           selectedItem={this.state.selectedItem} >
           {({
             getInputProps,
@@ -104,7 +114,11 @@ class Search extends React.Component {
             {isOpen ? (
               <Paper className={classes.paper}>
                 {!!this.state.results ? 
-                  this.state.results.map(item => <MenuItem {...getItemProps} key={item.display_name}>{item.display_name}</MenuItem>)
+                  this.state.results.map(item => 
+                    <MenuItem {...getItemProps} key={item.display_name} onClick={this.handleItemClick}>
+                      <img className={classes.logo} src={item.logo}/>
+                      {item.display_name}
+                    </MenuItem>)
                   : <MenuItem>Empty</MenuItem>}
               </Paper>
               ) : null }
@@ -129,4 +143,4 @@ const mapDispatchToProps = (dispatch) => {
   return {getSearch: (term) => dispatch(getSearch(term))};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Search));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withStyles(styles)(Search)));
