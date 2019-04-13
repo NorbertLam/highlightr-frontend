@@ -9,6 +9,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import {withStyles} from '@material-ui/core/styles';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -16,6 +17,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {getStream} from '../actions/streamerActions';
 import {getClips, selectClip} from '../actions/clipActions';
+
+const styles = theme => ({
+  indicator: {
+    backgroundColor: '#6441A1'
+  }
+})
 
 class StreamerContainer extends React.Component {
 
@@ -81,7 +88,7 @@ class StreamerContainer extends React.Component {
       <div>
         <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream === undefined ? this.state.streamer.display_name : this.props.currentStream.title}</h1>
         <Toolbar>
-          <Tabs onChange={this.handleChange} value={this.state.value}>
+          <Tabs classes={{indicator: this.props.classes.indicator}} onChange={this.handleChange} value={this.state.value}>
             <Tab label="Stream"/>
             <Tab label="VoDs" />
             <Tab label="Clips" />
@@ -118,4 +125,4 @@ const maptDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, maptDispatchToProps)(StreamerContainer);
+export default connect(mapStateToProps, maptDispatchToProps)(withStyles(styles)(StreamerContainer));
