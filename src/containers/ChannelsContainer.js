@@ -4,10 +4,9 @@ import ChannelCard from '../components/ChannelCard'
 
 import {connect} from 'react-redux'
 
+import GridList from '@material-ui/core/GridList';
+
 import {getStreamers} from '../actions/streamerActions'
-
-import Grid from '@material-ui/core/Grid';
-
 
 class ChannelContainer extends React.Component {
 
@@ -16,6 +15,8 @@ class ChannelContainer extends React.Component {
   }
   
   render () {
+    const {classes} = this.props;
+
     const streamersArr = Object.keys(this.props.streamers).map(display_name => {
       return <ChannelCard key={this.props.streamers[display_name].twitch_id} 
         streamerObj={this.props.streamers[display_name]} />
@@ -24,9 +25,9 @@ class ChannelContainer extends React.Component {
     return (
       <div>
         <h1>CHANNELS</h1>
-        <Grid container className="channel-container" >
+        <GridList container className="channel-container" >
           {streamersArr}
-        </Grid>
+        </GridList>
       </div>
     )
   }

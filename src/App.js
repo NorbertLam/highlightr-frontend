@@ -4,6 +4,7 @@ import NavBar from './containers/NavBar';
 import ChannelsContainer from './containers/ChannelsContainer';
 import HomeContainer from './containers/HomeContainer';
 import StreamerContainer from './containers/StreamerContainer';
+import VodCardContainer from './containers/VodCardContainer';
 import VodContainer from './containers/VodContainer';
 import SignupContainer from './containers/SignupContainer';
 import LoginContainer from './containers/LoginContainer';
@@ -31,6 +32,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
+          <Route path="/channel/:login/vods" component={StreamerContainer} />
           <Route path="/channel/:login/:vod" component={VodContainer} />
           <Route path="/channel/:login" component={StreamerContainer} />
           <Route path="/channels" component={ChannelsContainer} />

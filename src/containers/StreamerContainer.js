@@ -3,6 +3,8 @@ import VodCardContainer from './VodCardContainer';
 import ClipContainer from './ClipContainer';
 import ClipCardsContainer from './ClipCardsContainer';
 
+import {withRouter} from 'react-router-dom';
+
 import {connect} from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -36,12 +38,16 @@ class StreamerContainer extends React.Component {
   }
 
   componentDidMount() {
-    const streamerName = this.props.location.pathname.split('/')[2];
+    const pathName = this.props.location.pathname.split('/');
+    const streamerName = pathName[2];
+
+    if(pathName.length > 3) {
+      this.setState({value: 1})
+    }
 
     fetch(`http://localhost:3000/api/v1/streamers/${streamerName}`)
       .then(resp => resp.json())
       .then(streamer => this.setState({streamer}, () => {
-        console.log(streamer)
         this.props.getStream(this.state.streamer.twitch_id);
         this.props.getClips(this.state.streamer.twitch_id);
       }));
@@ -85,21 +91,19 @@ class StreamerContainer extends React.Component {
   }
 
   render() {
-    
     return (
       <div>
         <Toolbar>
           <img className={this.props.classes.img} src={this.state.streamer.profile_image_url}/>
           <h2>{this.state.streamer.display_name}</h2>
-          {/* <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream === undefined ? this.state.streamer.display_name : this.props.currentStream.title}</h1> */}
           <Tabs classes={{indicator: this.props.classes.indicator}} onChange={this.handleChange} value={this.state.value}>
             <Tab label="Stream"/>
-            <Tab label="VoDs" />
+            <Tab label="VoDs" onClick={() => this.props.history.push(`/channel/${this.state.streamer.login}/vods`)} />
             <Tab label="Clips" />
           </Tabs>
         </Toolbar>
         {this.state.value === 0 && this.renderStream()}
-        {this.state.value === 1 && <VodCardContainer twitch_id={this.state.streamer.twitch_id} />}
+        {this.state.value === 1 && <VodCardContainer />}
         {this.state.value === 2 && <ClipCardsContainer streamerObj={this.state.streamer} handleOpen={this.handleOpen} />}
         <Dialog
           fullWidth={true}
@@ -129,4 +133,4 @@ const maptDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, maptDispatchToProps)(withStyles(styles)(StreamerContainer));
+export default connect(mapStateToProps, maptDispatchToProps)(withStyles(styles)(withRouter(StreamerContainer)));
