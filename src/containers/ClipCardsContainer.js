@@ -13,7 +13,6 @@ class ClipsContainer extends React.Component {
 
     return (
       <div>
-        <h1>{this.props.streamerObj.login} Clips</h1>
         <Grid container alignItems="center" justify="center">
           {clipsArr}
         </Grid>

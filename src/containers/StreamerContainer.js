@@ -10,10 +10,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {withStyles} from '@material-ui/core/styles';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {getStream} from '../actions/streamerActions';
 import {getClips, selectClip} from '../actions/clipActions';
@@ -21,6 +17,10 @@ import {getClips, selectClip} from '../actions/clipActions';
 const styles = theme => ({
   indicator: {
     backgroundColor: '#6441A1'
+  },
+  img: {
+    maxWidth: '5%',
+    madHeight: '5%'
   }
 })
 
@@ -41,6 +41,7 @@ class StreamerContainer extends React.Component {
     fetch(`http://localhost:3000/api/v1/streamers/${streamerName}`)
       .then(resp => resp.json())
       .then(streamer => this.setState({streamer}, () => {
+        console.log(streamer)
         this.props.getStream(this.state.streamer.twitch_id);
         this.props.getClips(this.state.streamer.twitch_id);
       }));
@@ -78,6 +79,7 @@ class StreamerContainer extends React.Component {
             height="720"
             width="350">
           </iframe>
+          <h1>{!!this.props.currentStream ? this.props.currentStream.title : null}</h1>
       </Fragment>
     )
   }
@@ -86,8 +88,10 @@ class StreamerContainer extends React.Component {
     
     return (
       <div>
-        <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream === undefined ? this.state.streamer.display_name : this.props.currentStream.title}</h1>
         <Toolbar>
+          <img className={this.props.classes.img} src={this.state.streamer.profile_image_url}/>
+          <h2>{this.state.streamer.display_name}</h2>
+          {/* <h1 style={{overflowWrap: 'break-word'}}>{this.props.currentStream === undefined ? this.state.streamer.display_name : this.props.currentStream.title}</h1> */}
           <Tabs classes={{indicator: this.props.classes.indicator}} onChange={this.handleChange} value={this.state.value}>
             <Tab label="Stream"/>
             <Tab label="VoDs" />
