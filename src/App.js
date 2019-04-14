@@ -4,7 +4,6 @@ import NavBar from './containers/NavBar';
 import ChannelsContainer from './containers/ChannelsContainer';
 import HomeContainer from './containers/HomeContainer';
 import StreamerContainer from './containers/StreamerContainer';
-import VodCardContainer from './containers/VodCardContainer';
 import VodContainer from './containers/VodContainer';
 import SignupContainer from './containers/SignupContainer';
 import LoginContainer from './containers/LoginContainer';

@@ -15,8 +15,8 @@ const VodCard = (props) => {
   const thumbnail = props.vodObj.thumbnail_url.split('-').slice(0, 2).join('-');
 
   return (
-    <Fragment onClick={() => props.history.push(`/channel/${props.vodObj.user_name}/${props.vodObj.id}`)} >
-      <GridListTile key={props.vodObj.id} >
+    <Fragment  >
+      <GridListTile key={props.vodObj.id} onClick={() => props.history.push(`/channel/${props.vodObj.user_name}/${props.vodObj.id}`)}>
         <img 
           style={style} 
           src={thumbnail + '-320x180.jpg'} 
@@ -29,14 +29,6 @@ const VodCard = (props) => {
         />
       </GridListTile>
     </Fragment>
-    // <div onClick={() => props.history.push(`/channel/${props.vodObj.user_name}/${props.vodObj.id}`)}>
-    //   <img 
-    //     style={style} 
-    //     src={thumbnail + '-320x180.jpg'} 
-    //     alt={thumbnail} 
-    //     onError={(e) =>{e.target.onerror = null; e.target.src="https://i.ytimg.com/vi/19s0vIeJthA/maxresdefault.jpg"}}
-    //   />
-    // </div>
   )
 }
 

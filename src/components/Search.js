@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import Typography from '@material-ui/core/Typography';
 
 
 import {getSearch} from '../actions/searchActions';
@@ -72,7 +71,6 @@ class Search extends React.Component {
   }
 
   handleInput = async e => {
-    const { input } = this.state
     this.setState({ input: e.target.value, results: null});
     const result = await searchAPIDebounced(e.target.value).then(resp => resp.json());
     this.setState({results: result.channels});
@@ -116,7 +114,7 @@ class Search extends React.Component {
                 {!!this.state.results ? 
                   this.state.results.map(item => 
                     <MenuItem {...getItemProps} key={item.display_name} onClick={this.handleItemClick}>
-                      <img className={classes.logo} src={item.logo}/>
+                      <img className={classes.logo} src={item.logo} alt={item.logo} />
                       {item.display_name}
                     </MenuItem>)
                   : <MenuItem>Empty</MenuItem>}

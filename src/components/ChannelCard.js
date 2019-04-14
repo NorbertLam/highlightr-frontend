@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -25,8 +25,6 @@ const styles = theme => ({
 
 
 const ChannelCard = (props) => {
-  
-  const {classes} = props;
 
   return (
     <div onClick={() => props.history.push(`/channel/${props.streamerObj.login}`)} >
@@ -52,11 +50,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(withStyles(styles)(withRouter(ChannelCard)));
-
-{/* <GridListTile key={props.streamerObj.profile_image_url}>
-  <img src={props.streamerObj.profile_image_url} alt={props.streamerObj.profile_image_url} />
-  <GridListTileBar
-    title={props.streamerObj.profile_image_url}
-    subtitle={<span>by: {props.streamerObj.login}</span>}
-  />
-</GridListTile> */}

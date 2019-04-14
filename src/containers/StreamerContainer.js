@@ -96,7 +96,7 @@ class StreamerContainer extends React.Component {
     return (
       <div>
         <Toolbar>
-          <img className={this.props.classes.img} src={profile_image_url}/>
+          <img className={this.props.classes.img} src={profile_image_url} alt={profile_image_url} />
           <h2>{display_name}</h2>
           <Tabs classes={{indicator: this.props.classes.indicator}} onChange={this.handleChange} value={this.state.value}>
             <Tab label="Stream" onClick={() => this.props.history.push(`/channel/${login}`)} />

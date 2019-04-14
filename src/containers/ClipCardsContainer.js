@@ -2,7 +2,7 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
 
 import ClipCard from '../components/ClipCard';
 
@@ -13,9 +13,9 @@ class ClipsContainer extends React.Component {
 
     return (
       <div>
-        <Grid container alignItems="center" justify="center">
+        <GridList container alignItems="center" justify="center">
           {clipsArr}
-        </Grid>
+        </GridList>
       </div>
     )
   }

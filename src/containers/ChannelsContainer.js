@@ -15,7 +15,6 @@ class ChannelContainer extends React.Component {
   }
   
   render () {
-    const {classes} = this.props;
 
     const streamersArr = Object.keys(this.props.streamers).map(display_name => {
       return <ChannelCard key={this.props.streamers[display_name].twitch_id} 
