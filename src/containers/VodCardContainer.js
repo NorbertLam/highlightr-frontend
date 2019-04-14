@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 import VodCard from '../components/VodCard'
 
-import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
 
 import {getVods} from '../actions/vodActions';
 
@@ -29,9 +29,9 @@ class VodCardContainer extends React.Component {
     return (
       <div>
         <h1>Vods</h1>
-        <Grid container alignItems="center" justify="center">
+        <GridList style={{ alignItems: 'center', justifyContent: 'center'}} >
           {vodsArr}
-        </Grid>
+        </GridList>
       </div>
     )
   }

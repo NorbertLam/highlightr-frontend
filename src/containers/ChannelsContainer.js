@@ -25,7 +25,7 @@ class ChannelContainer extends React.Component {
     return (
       <div>
         <h1>CHANNELS</h1>
-        <GridList container className="channel-container" >
+        <GridList style={{ alignItems: 'center', justifyContent: 'center'}}>
           {streamersArr}
         </GridList>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -21,10 +21,6 @@ const styles = theme => ({
     width: 500,
     height: 450,
   },
-  titleBar: {
-    paddingLeft: '10%',
-    paddingRight: '10%'
-  },
 });
 
 
@@ -33,12 +29,10 @@ const ChannelCard = (props) => {
   const {classes} = props;
 
   return (
-    <div className={classes.root} onClick={() => props.history.push(`/channel/${props.streamerObj.login}`)} >
-      {/* <img src={props.streamerObj.profile_image_url} alt={props.streamerObj.profile_image_url} /> */}
-      <GridListTile key={props.streamerObj.profile_image_url}>
+    <div onClick={() => props.history.push(`/channel/${props.streamerObj.login}`)} >
+      <GridListTile key={props.streamerObj.profile_image_url} >
         <img src={props.streamerObj.profile_image_url} alt={props.streamerObj.profile_image_url} />
         <GridListTileBar
-        className={classes.titleBar}
           title={props.streamerObj.display_name}
           // subtitle={<span>by: {props.streamerObj.login}</span>}
         />
