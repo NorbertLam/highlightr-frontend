@@ -28,6 +28,11 @@ const styles = theme => ({
   media: {
     objectFit: 'cover',
   },
+  select: {
+    marginLeft: '10px',
+    marginTop: '10px',
+    float: 'left',
+  },
 })
 
 class Featured extends React.Component {
@@ -51,9 +56,7 @@ class Featured extends React.Component {
   }
 
   handleChange = (name) => (event) => {
-    // console.log('change', name, event.target.value)
     this.setState({[name]: event.target.value}, () => {
-      // console.log(this.state)
       this.props.getTopClips(this.state.period);
     });
   }
@@ -85,6 +88,7 @@ class Featured extends React.Component {
           <ClipContainer />
         </Dialog>
         <Select
+          className={classes.select}
           value={this.state.period}
           onChange={this.handleChange('period')}
           inputProps={{

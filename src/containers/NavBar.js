@@ -77,41 +77,13 @@ class NavBar extends React.Component {
               <Tab style={{color: 'white'}} component={NavLink} to="/" label="Home"/>
               <Tab style={{color: 'white'}} component={NavLink} to="/channels" label="Channels"/>
               {isUser === 0 ? <Tab style={{color: 'white'}} component={NavLink} to="/signup" label="Signup"/> : null}
-              {isUser === 0  ? <Tab style={{color: 'white'}} onClick={this.handleOpen} label="Login"/> : null}
+              {isUser === 0  ? <Tab style={{color: 'white'}} component={NavLink} to="login" label="Login"/> : null}
               <Tab style={{color: 'white'}} component={NavLink} to="/profile" label="Profile"/>
               {isUser > 0 ? <Tab onClick={this.handleLogout} label="Logout"/> : null}
             </Tabs>
             <Search/>
           </Toolbar>
         </AppBar>
-          <Dialog open={this.state.open} onClose={this.handleClose} maxWidth="lg">
-            <div>
-              <form style={{backgroundColor : '#484848'}} id="loginForm" onSubmit={this.handleSubmit}>
-                <h1>Holyfuckthisistrash</h1>
-                <TextField
-                  label="Email"
-                  className="email"
-                  type="email"
-                  value={this.state.email}
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.handleChange('email')}
-                /> <br/>
-                <TextField
-                  label="Password"
-                  className="password"
-                  type="password"
-                  value={this.state.password}
-                  margin="normal"
-                  variant="outlined"
-                  onChange={this.handleChange('password')}
-                /> <br/>
-                <Button variant="contained" style={this.style} type="submit" form="loginForm">
-                  Login
-                </Button>
-              </form>
-            </div>
-          </Dialog>
       </div>
     )
   }

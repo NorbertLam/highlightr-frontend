@@ -7,11 +7,11 @@ import {withRouter} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 
+import {withStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {withStyles} from '@material-ui/core/styles';
 
 import {getStream} from '../actions/streamerActions';
 import {getClips, selectClip} from '../actions/clipActions';
@@ -30,6 +30,7 @@ class StreamerContainer extends React.Component {
 
   state = {
     streamer: {},
+    period: 'week',
     value: 0,
     open: false
   }
@@ -46,7 +47,6 @@ class StreamerContainer extends React.Component {
       .then(resp => resp.json())
       .then(streamer => this.setState({streamer}, () => {
         this.props.getStream(this.state.streamer.twitch_id);
-        this.props.getClips(this.state.streamer.twitch_id);
       }));
   }
 
@@ -61,6 +61,12 @@ class StreamerContainer extends React.Component {
 
   handleChange = (event, value) => {
     this.setState({value})
+  }
+
+  handlePeriod = (name) => (event) => {
+    this.setState({[name]: event.target.value}, () => {
+      this.props.getClips(this.state.period);
+    });
   }
 
   renderStream = () => {
@@ -127,7 +133,7 @@ const mapStateToProps = (state) => {
 const maptDispatchToProps = (dispatch) => {
   return {
     getStream: (user_id) => dispatch(getStream(user_id)),
-    getClips: (twitch_id) => dispatch(getClips(twitch_id)),
+    getClips: (twitch_id, period) => dispatch(getClips(twitch_id, period)),
     selectClip: (clipObj) => dispatch(selectClip(clipObj))
   }
 }

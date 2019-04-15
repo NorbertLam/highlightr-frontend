@@ -22,7 +22,7 @@ class App extends Component {
     if (token) {
       this.props.getCurrUser(token);
     } else {
-      console.log('not logged in');
+
     }
   }
 
