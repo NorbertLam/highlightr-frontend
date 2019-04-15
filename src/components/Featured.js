@@ -7,13 +7,10 @@ import ClipCard from '../components/ClipCard';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
 
-import {getTopClips} from '../actions/clipActions';
+import {getTopClips, selectClip} from '../actions/clipActions';
+import ClipContainer from '../containers/ClipContainer';
 
 const styles = theme => ({
   div: {
@@ -34,13 +31,26 @@ const styles = theme => ({
 
 class Featured extends React.Component {
 
+  state = {
+    open: false
+  }
+
   componentDidMount() {
     this.props.getTopClips();
   }
 
+  handleOpen = () => {
+    this.setState({open: true});
+  }
+
+  handleClose = () => {
+    this.setState({open: false});
+    this.props.selectClip({});
+  }
+
   render() {    
     const { classes, topClips} = this.props;
-    const clipsArr = topClips.map(clip => <ClipCard key={clip.id} clipObj={clip} handleOpen={this.props.handleOpen} />)
+    const clipsArr = topClips.map(clip => <ClipCard key={clip.id} clipObj={clip} handleOpen={this.handleOpen} />)
 
     return (
       <div>
@@ -56,6 +66,14 @@ class Featured extends React.Component {
             allowFullScreen={true}>
           </iframe>
         </div>
+        <Dialog
+          fullWidth={true}
+          open={this.state.open}
+          onClose={this.handleClose}
+          maxWidth="lg"
+        >
+          <ClipContainer />
+        </Dialog>
         <Grid style={{ alignItems: 'center', justifyContent: 'center'}} container>
           {clipsArr}
         </Grid>
@@ -72,4 +90,4 @@ const mapStateToProps = (state) => {
   return {topClips: state.topClips}
 }
 
-export default connect(mapStateToProps, {getTopClips})(withStyles(styles)(Featured));
+export default connect(mapStateToProps, {getTopClips, selectClip})(withStyles(styles)(Featured));

@@ -31,9 +31,6 @@ class StreamerContainer extends React.Component {
   state = {
     streamer: {},
     value: 0,
-    frameValue: false,
-    vodValue: true,
-    clipValue: true,
     open: false
   }
 
