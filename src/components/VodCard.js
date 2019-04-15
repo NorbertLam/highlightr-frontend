@@ -7,10 +7,22 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 const VodCard = (props) => {
 
-  const style = {
-    width: '320px',
-    height: '180px'
-  }
+  const styles = theme => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+      width: 500,
+      height: 450,
+    },
+    icon: {
+      color: 'rgba(255, 255, 255, 0.54)',
+    },
+  });
 
   const thumbnail = props.vodObj.thumbnail_url.split('-').slice(0, 2).join('-');
 
@@ -18,7 +30,7 @@ const VodCard = (props) => {
     <Fragment  >
       <GridListTile key={props.vodObj.id} onClick={() => props.history.push(`/channel/${props.vodObj.user_name}/${props.vodObj.id}`)}>
         <img 
-          style={style} 
+          // style={style} 
           src={thumbnail + '-320x180.jpg'} 
           alt={thumbnail} 
           onError={(e) =>{e.target.onerror = null; e.target.src="https://i.ytimg.com/vi/19s0vIeJthA/maxresdefault.jpg"}}

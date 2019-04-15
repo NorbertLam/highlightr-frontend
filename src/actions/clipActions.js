@@ -20,8 +20,8 @@ export const getClips = (streamerID) => (dispatch) => {
     })
 }
 
-export const getTopClips = () => (dispatch) => {
-  return fetch(`https://api.twitch.tv/kraken/clips/top?&limit=12`, {
+export const getTopClips = (period) => (dispatch) => {
+  return fetch(`https://api.twitch.tv/kraken/clips/top?&period=${period}&limit=12`, {
     headers: {
       'content-type': 'application/json',
       'Accept': 'application/vnd.twitchtv.v5+json',
