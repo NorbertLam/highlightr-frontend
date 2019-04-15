@@ -9,6 +9,7 @@ const initialState = {
   selectedClip: {},
   vods: [],
   clips: [],
+  topClips: [],
   results: []
 }
 
@@ -40,6 +41,9 @@ const reducer = (state = initialState, action) => {
     }
     case ('LOAD_CLIPS'): {
       return {...state, clips: action.payload};
+    }
+    case ('LOAD_TOP_CLIPS'): {
+      return {...state, topClips: action.payload};
     }
     case ('SELECT_CLIP'): {
       return {...state, selectedClip: action.payload};
