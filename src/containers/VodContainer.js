@@ -11,13 +11,24 @@ class VodContainer extends React.Component {
   state = {
     startTime: '00:00:00',
     autoplay: false,
-    highlights: []
+    highlights: [],
+    title: ''
   }
 
   componentDidMount() {
     fetch(`http://localhost:3000/api/v1/vod/${this.getVodId()}`)
       .then(resp => resp.json())
       .then(vod => this.setState({highlights: vod.highlights}))
+    fetch(`https://api.twitch.tv/helix/videos?id=${this.getVodId()}`, {
+      headers: {
+        'content-type': 'application/json',
+        'Client-ID': process.env.REACT_APP_CLIENT
+      }
+    })
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({title: json.data[0].title})
+      })
   }
 
   getVodId = () => {
@@ -41,7 +52,7 @@ class VodContainer extends React.Component {
 
     return (
       <div>
-        <h1>VOD</h1>
+        <h1>{this.state.title}</h1>
         <iframe style={{float: 'left', marginLeft: '10px'}}
           title={'idk'}
           src={`https://player.twitch.tv/?video=v${this.getVodId()}&autoplay=${this.state.autoplay}&time=${time[0]}h${time[1]}m${time[2]}s`}
@@ -51,7 +62,7 @@ class VodContainer extends React.Component {
           scrolling="no"
           allowFullScreen={true}>
         </iframe>
-          <Grid>
+          <Grid style={{height: '720px', overflowX: 'scroll'}}>
             {highlightsArr}
           </Grid>
         <div>
