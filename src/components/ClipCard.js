@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';

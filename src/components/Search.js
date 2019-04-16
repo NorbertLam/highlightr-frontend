@@ -66,10 +66,6 @@ class Search extends React.Component {
     this.setState = () => {};
   }
 
-  handleChange = (event) => {
-    console.log('aaaaaaaaa');
-  }
-
   handleInput = async e => {
     this.setState({ input: e.target.value, results: null});
     const result = await searchAPIDebounced(e.target.value).then(resp => resp.json());
@@ -77,7 +73,7 @@ class Search extends React.Component {
   }
 
   handleItemClick = (event) => {
-    this.props.history.push(`/channel/${event.target.innerText}`);
+    this.props.history.push(`/channel/${event.target.innerText.replace(/\s/g, '')}`);
     this.setState({input: ''});
   }
 
@@ -95,9 +91,6 @@ class Search extends React.Component {
             getItemProps,
             getMenuProps,
             isOpen,
-            inputValue,
-            highlightedIndex,
-            selectedItem,
       }) => (
         <div>
           <TextField
