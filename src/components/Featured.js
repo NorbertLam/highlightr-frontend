@@ -12,6 +12,7 @@ import Dialog from '@material-ui/core/Dialog';
 
 import {getTopClips, selectClip} from '../actions/clipActions';
 import ClipContainer from '../containers/ClipContainer';
+import { relative } from 'path';
 
 const styles = theme => ({
   div: {
@@ -32,6 +33,13 @@ const styles = theme => ({
     marginLeft: '10px',
     marginTop: '10px',
     float: 'left',
+  },
+  box : {
+    width: '360px', 
+    height: '240px', 
+    borderStyle: 'solid', 
+    borderColor: 'white', 
+    float: 'right',
   },
 })
 
@@ -78,6 +86,9 @@ class Featured extends React.Component {
             scrolling="no"
             allowFullScreen={true}>
           </iframe>
+          <div className={classes.box}>
+            <h1>jjjj</h1>
+          </div>
         </div>
         <Dialog
           fullWidth={true}
