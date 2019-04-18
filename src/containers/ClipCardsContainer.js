@@ -34,7 +34,7 @@ class ClipsContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname != this.props.location.pathname) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
       const pathName = nextProps.location.pathname.split('/');
       const streamerName = pathName[2];
       

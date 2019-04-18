@@ -32,6 +32,12 @@ class NavBar extends React.Component {
     open: false
   }
 
+  componentWillMount() {
+    if (Object.keys(this.props.user).length === 0) {
+
+    } 
+  }
+
   handleTab = (event, value) => {
     this.setState({value});
   }
@@ -63,6 +69,7 @@ class NavBar extends React.Component {
   
   render () {
 
+    // const isUser = this.props.user === null ? Object.keys(this.props.user).length : 0
     const isUser = Object.keys(this.props.user).length;
 
     return (

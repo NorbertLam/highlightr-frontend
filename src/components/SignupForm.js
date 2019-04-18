@@ -30,7 +30,7 @@ class SignupForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.createUser(this.state);
-    // this.props.history.push('/')
+    this.props.history.push('login')
   }
 
   render () {
@@ -44,6 +44,7 @@ class SignupForm extends React.Component {
             value={this.state.email}
             margin="normal"
             variant="outlined"
+            required="true"
             onChange={this.handleChange('email')}
           /> <br/>
           <TextField
@@ -52,6 +53,7 @@ class SignupForm extends React.Component {
             value={this.state.username}
             margin="normal"
             variant="outlined"
+            required="true"
             onChange={this.handleChange('username')}
           /> <br/>
           <TextField
@@ -61,6 +63,7 @@ class SignupForm extends React.Component {
             value={this.state.password}
             margin="normal"
             variant="outlined"
+            required="true"
             onChange={this.handleChange('password')}
           /> <br/>
           <Button variant="contained" style={this.style} type="submit" form="signupForm">

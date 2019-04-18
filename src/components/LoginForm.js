@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.loginUser(this.state);
-    this.props.history.push('/profile');
+    this.props.history.push('/');
   }
   
   render () {
@@ -42,6 +42,7 @@ class LoginForm extends React.Component {
             value={this.state.email}
             margin="normal"
             variant="outlined"
+            required="true"
             onChange={this.handleChange('email')}
           /> <br/>
           <TextField
@@ -51,6 +52,7 @@ class LoginForm extends React.Component {
             value={this.state.password}
             margin="normal"
             variant="outlined"
+            required="true"
             onChange={this.handleChange('password')}
           /> <br/>
           <Button variant="contained" style={this.style} type="submit" form="loginForm">
@@ -62,8 +64,12 @@ class LoginForm extends React.Component {
   }
 }
 
+const mapStateToProps = ({user}) => ({
+  user
+})
+
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (userObj) => dispatch(loginUser(userObj))
 })
 
-export default connect(null, mapDispatchToProps)(withRouter(LoginForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginForm));

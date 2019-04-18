@@ -12,7 +12,6 @@ import Dialog from '@material-ui/core/Dialog';
 
 import {getTopClips, selectClip} from '../actions/clipActions';
 import ClipContainer from '../containers/ClipContainer';
-import { relative } from 'path';
 
 const styles = theme => ({
   div: {
@@ -83,16 +82,14 @@ class Featured extends React.Component {
           <iframe
             className={classes.iframe}
             title={'featured'}
-            src={`https://player.twitch.tv/?channel=${'mahjon'}&muted=true&autoplay=false`}
+            // src={`https://player.twitch.tv/?channel=${'mahjon'}&muted=true&autoplay=false`}
+            src={`https://player.twitch.tv/?video=v412213781&autoplay=false&muted=true`}
             height="475"
             width="960"
             frameBorder="0"
             scrolling="no"
             allowFullScreen={true}>
           </iframe>
-          {/* <div className={classes.box}>
-            <h1>jjjj</h1>
-          </div> */}
         </div>
         <Dialog
           fullWidth={true}
