@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {withRouter} from 'react-router';
+
 import {connect} from 'react-redux';
 
 import {withStyles} from '@material-ui/core/styles';
@@ -21,16 +23,30 @@ const styles = theme => ({
 class ClipsContainer extends React.Component {
 
   state = {
+    streamerLogin: '',
     period: 'week'
   }
 
   componentDidMount() {
-    this.props.getClips(this.props.streamerObj.login, this.state.period);
+    this.setState({streamerLogin: this.props.streamerObj.login}, () => {
+      this.props.getClips(this.state.streamerLogin, this.state.period);
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname != this.props.location.pathname) {
+      const pathName = nextProps.location.pathname.split('/');
+      const streamerName = pathName[2];
+      
+      this.setState({streamerLogin: streamerName}, () => {
+        this.props.getClips(this.state.streamerLogin, this.state.period);
+      })
+    }
   }
 
   handleChange = (name) => (event) => {
     this.setState({[name]: event.target.value}, () => {
-      this.props.getClips(this.props.streamerObj.login, this.state.period);
+      this.props.getClips(this.state.streamerLogin, this.state.period);
     });
   }
 
@@ -65,4 +81,4 @@ const mapStateToProps = (state) => {
   return {clips: state.clips}
 }
 
-export default connect(mapStateToProps, {getClips})(withStyles(styles)(ClipsContainer));
+export default connect(mapStateToProps, {getClips})(withStyles(styles)(withRouter(ClipsContainer)));

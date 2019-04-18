@@ -12,6 +12,8 @@ import {getVods} from '../actions/vodActions';
 
 class VodCardContainer extends React.Component {
 
+  state = {}
+
   componentDidMount() {
     const pathName = this.props.location.pathname.split('/');
     const streamerName = pathName[2];
@@ -21,6 +23,20 @@ class VodCardContainer extends React.Component {
       .then(json => {
         this.props.getVods(json.twitch_id);
       })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname != this.props.location.pathname) {
+      const pathName = nextProps.location.pathname.split('/');
+      const streamerName = pathName[2];
+    
+      fetch(`http://localhost:3000/api/v1/streamers/${streamerName}`)
+        .then(resp => resp.json())
+        .then(json => {
+          this.props.getVods(json.twitch_id);
+          this.setState()
+        })
+    }
   }
 
   render() {
