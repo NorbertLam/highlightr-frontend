@@ -38,7 +38,7 @@ class StreamerContainer extends React.Component {
   componentDidMount() {
     const pathName = this.props.location.pathname.split('/');
     const streamerName = pathName[2];
-
+    
     if(pathName.length > 3) {
       this.setState({value: 1})
     }
@@ -48,6 +48,23 @@ class StreamerContainer extends React.Component {
       .then(streamer => this.setState({streamer}, () => {
         this.props.getStream(this.state.streamer.twitch_id);
       }));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname != this.props.location.pathname) {
+      const pathName = nextProps.location.pathname.split('/');
+      const streamerName = pathName[2];
+      
+      if(pathName.length > 3) {
+        this.setState({value: 1})
+      }
+
+      fetch(`http://localhost:3000/api/v1/streamers/${streamerName}`)
+        .then(resp => resp.json())
+        .then(streamer => this.setState({streamer}, () => {
+          this.props.getStream(this.state.streamer.twitch_id);
+        }));
+    }
   }
 
   handleOpen = () => {

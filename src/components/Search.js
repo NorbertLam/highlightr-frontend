@@ -31,7 +31,8 @@ const styles = theme => ({
     '&:hover:before': {
       borderBottomColor: ['white', '!important'],
     },
-    marginTop: '31px'
+    marginTop: '31px',
+    width: '260px'
   },
   paper: {
     position: 'absolute',
@@ -41,7 +42,7 @@ const styles = theme => ({
     right: 0,
   },
   logo: {
-    width: '30%'
+    width: '20%'
   }
 });
 

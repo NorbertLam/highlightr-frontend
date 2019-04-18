@@ -24,3 +24,11 @@ export const getStream = (user_id) => {
       .then(json => dispatch(loadStream(json.data[0])));
   }
 }
+
+export const getStreamer = (streamerName) => (dispatch) => {
+  return fetch(`http://localhost:3000/api/v1/streamers/${streamerName}`)
+      .then(resp => resp.json())
+      .then(streamer => this.setState({streamer}, () => {
+        this.props.getStream(this.state.streamer.twitch_id);
+      }));
+}

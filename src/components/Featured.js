@@ -16,10 +16,12 @@ import { relative } from 'path';
 
 const styles = theme => ({
   div: {
+    display: 'flex',
     backgroundColor: '#f8ceec',
     backgroundImage: 'linear-gradient(315deg, #647DEE 0%, #7F53AC 74%)'
   },
   iframe: {
+    margin: 'auto',
     marginTop: '5%',
     paddingBottom: '5%',
   },
@@ -35,11 +37,13 @@ const styles = theme => ({
     float: 'left',
   },
   box : {
-    width: '360px', 
-    height: '240px', 
+    margin: 'auto',
+    display: 'inline',
+    width: '480px', 
+    height: '480px', 
     borderStyle: 'solid', 
     borderColor: 'white', 
-    float: 'right',
+    marginLeft: '5px'
   },
 })
 
@@ -79,16 +83,16 @@ class Featured extends React.Component {
           <iframe
             className={classes.iframe}
             title={'featured'}
-            src={`https://player.twitch.tv/?channel=${'twitchpresents'}&muted=true&autoplay=false`}
+            src={`https://player.twitch.tv/?channel=${'mahjon'}&muted=true&autoplay=false`}
             height="475"
             width="960"
             frameBorder="0"
             scrolling="no"
             allowFullScreen={true}>
           </iframe>
-          <div className={classes.box}>
+          {/* <div className={classes.box}>
             <h1>jjjj</h1>
-          </div>
+          </div> */}
         </div>
         <Dialog
           fullWidth={true}
