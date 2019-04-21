@@ -38,10 +38,10 @@ const styles = theme => ({
   box : {
     margin: 'auto',
     display: 'inline',
-    width: '480px', 
-    height: '480px', 
-    borderStyle: 'solid', 
-    borderColor: 'white', 
+    width: '480px',
+    height: '480px',
+    borderStyle: 'solid',
+    borderColor: 'white',
     marginLeft: '5px'
   },
 })
@@ -72,7 +72,7 @@ class Featured extends React.Component {
     });
   }
 
-  render() {    
+  render() {
     const { classes, topClips} = this.props;
     const clipsArr = topClips.map(clip => <ClipCard key={clip.id} clipObj={clip} handleOpen={this.handleOpen} />)
 
@@ -82,8 +82,7 @@ class Featured extends React.Component {
           <iframe
             className={classes.iframe}
             title={'featured'}
-            // src={`https://player.twitch.tv/?channel=${'mahjon'}&muted=true&autoplay=false`}
-            src={`https://player.twitch.tv/?video=v412213781&autoplay=false&muted=true`}
+            src={`https://player.twitch.tv/?video=v411316906&autoplay=true&muted=true`}
             height="475"
             width="960"
             frameBorder="0"

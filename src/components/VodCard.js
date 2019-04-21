@@ -11,15 +11,14 @@ const VodCard = (props) => {
   return (
     <Fragment  >
       <GridListTile key={props.vodObj.id} onClick={() => props.history.push(`/channel/${props.vodObj.user_name}/${props.vodObj.id}`)}>
-        <img 
-          style={{width: '320px', height: '180px'}} 
-          src={thumbnail} 
-          alt={thumbnail} 
+        <img
+          style={{width: '320px', height: '180px'}}
+          src={thumbnail}
+          alt={thumbnail}
           onError={(e) =>{e.target.onerror = null; e.target.src="https://i.ytimg.com/vi/19s0vIeJthA/maxresdefault.jpg"}}
         />
         <GridListTileBar
           title={props.vodObj.title}
-          // subtitle={<span>by: {props.streamerObj.login}</span>}
         />
       </GridListTile>
     </Fragment>

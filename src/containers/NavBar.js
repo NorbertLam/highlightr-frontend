@@ -35,7 +35,7 @@ class NavBar extends React.Component {
   componentWillMount() {
     if (Object.keys(this.props.user).length === 0) {
 
-    } 
+    }
   }
 
   handleTab = (event, value) => {
@@ -66,10 +66,8 @@ class NavBar extends React.Component {
   handleClose = () => {
     this.setState({open: false});
   }
-  
-  render () {
 
-    // const isUser = this.props.user === null ? Object.keys(this.props.user).length : 0
+  render () {
     const isUser = Object.keys(this.props.user).length;
 
     return (

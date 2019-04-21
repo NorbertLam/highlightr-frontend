@@ -32,7 +32,6 @@ const ChannelCard = (props) => {
         <img src={props.streamerObj.profile_image_url} alt={props.streamerObj.profile_image_url} />
         <GridListTileBar
           title={props.streamerObj.display_name}
-          // subtitle={<span>by: {props.streamerObj.login}</span>}
         />
       </GridListTile>
     </div>
