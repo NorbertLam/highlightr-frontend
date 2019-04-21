@@ -10,5 +10,11 @@ npm i
 npm start
 ```
 
+### Environmen Variables
+Create .env file containing the following.
+```
+REACT_APP_CLIENT=YOUR TWITCH CLIENT ID
+```
+
 ### Backend
 https://github.com/NorbertLam/highlightr-backend
