@@ -1,5 +1,6 @@
 # Highlightr Frontend
 Highlightr is a twitch.tv clone with the additional feature of displaying highlights for past broadcasts. Highlights are computed by looking for keywords in the chat data for a VOD as well as the frequency of chat data over time.
+Videos, clips, and stream data is fetched through twitch.tv api at https://dev.twitch.tv/docs/api/.
 
 ### Demo Video
 https://youtu.be/Myr0r7b92r0
